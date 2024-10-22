@@ -1,0 +1,231 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "m4",
+	"patterns": [{ "include": "#keywords" },
+		{ "include": "#files" },
+		{ "include": "#strings" },
+		{ "include": "#brackets" },
+		{ "include": "#parameters" },
+		{ "include": "#arithmetics" },
+		{ "include": "#comments" },
+		{ "include": "#constants" },
+		{ "include": "#buildins" },
+		{ "exclude": "#functions"
+	}],
+	"repository": {
+		"expressions": {
+			"patterns": [{ "include": "#keywords" },
+				{ "include": "#files" },
+				{ "include": "#strings" },
+				{ "include": "#brackets" },
+				{ "include": "#parameters" },
+				{ "include": "#arithmetics" },
+				{ "include": "#comments" },
+				{ "include": "#constants" },
+				{ "include": "#buildins" },
+				{ "exclude": "#functions"
+			}]
+		},
+		"keywords": {
+			"comment": "Core M4 keywords",
+			"patterns": [{
+				"begin": "\\b(changequote|define|divert|dumpdef|errprint|eval|ifdef|ifelse|incr|index|len|maketemp|substr|translit|undefine|undivert)(\\()",
+				"end": "\\)",
+				"beginCaptures": {
+					"1": { "name": "keyword.control.m4" },
+					"2": { "name": "keyword.control.m4" }
+				},
+				"endCaptures": {
+					"0": { "name": "keyword.control.m4" }
+				},
+				"patterns": [{ "include": "#expressions" }]
+			},{
+				"name": "keyword.control.m4",
+				"match": "\\b(divnum)\\b"
+			},{
+				"begin": "\\b(syscmd)(\\()",
+				"end": "\\)",
+				"beginCaptures": {
+					"1": { "name": "keyword.control.m4" },
+					"2": { "name": "keyword.control.m4" }
+				},
+				"endCaptures": {
+					"0": { "name": "keyword.control.m4" }
+				},
+				"patterns": [{ "include": "#commands" }]
+			}]
+		},
+		"files": {
+			"comment": "Core M4 file keywords",
+			"patterns": [{
+				"begin": "\\b(include|sinclude)(\\()",
+				"end": "\\)",
+				"beginCaptures": {
+					"1": { "name": "keyword.control.m4" },
+					"2": { "name": "keyword.control.m4" }
+				},
+				"endCaptures": {
+					"0": { "name": "keyword.control.m4" }
+				},
+				"patterns": [{ "include": "#commands" }]				
+			}]
+		},
+		"strings": {
+			"comment": "Core M4 strings",
+			"patterns": [{
+				"name": "string.quoted.other.m4",
+				"begin": "`",
+				"end": "'",
+				"patterns": [{ "include": "#expressions" }]
+			},{
+				"name": "string.quoted.double.m4",
+				"begin": "\"",
+				"end": "\"",
+				"patterns": [{ "include": "#expressions" }]
+			}]
+		},
+		"brackets": {
+			"comment": "Core M4 brackets",
+			"patterns": [{
+				"name": "string.interpolated.m4",
+				"begin": "\\(",
+				"end": "\\)",
+				"beginCaptures": {
+					"0": { "name": "string.other.m4" }
+				},
+				"endCaptures": {
+					"0": { "name": "string.other.m4" }
+				},
+				"patterns": [{ "include": "#expressions" }]
+			}]
+		},
+		"parameters": {
+			"comment": "Core M4 parameters",
+			"patterns": [{
+				"name": "variable.parameter.m4",
+				"match": "\\b(\\$[\\d])\\b"
+			}]
+		},
+		"arithmetics": {
+			"comment": "Core M4 arithmetics",
+			"patterns": [{
+				"name": "keyword.operator.unary.m4",
+				"match": "[-+]"
+			},{
+				"name": "keyword.operator.arithmetic.m4",
+				"match": "(\\*\\*|\\^)"
+			},{
+				"name": "keyword.operator.arithmetic.m4",
+				"match": "[-+/*%]"
+			},{
+				"name": "keyword.operator.assignment.m4",
+				"match": "="
+			},{
+				"name": "keyword.operator.bitwise.m4",
+				"match": "(!|~)"
+			},{
+				"name": "keyword.operator.bitwise.m4",
+				"match": "(<<|>>)"
+			},{
+				"name": "keyword.operator.comparison.m4",
+				"match": "(==|!=|<|<=|>|>=|<>)"
+			},{
+				"name": "keyword.operator.logical.m4",
+				"match": "(&|&&|\\||\\|\\|)"						
+			}]
+		},
+		"comments": {
+			"comment": "Core M4 comments",
+			"patterns": [{
+				"name": "comment.line.m4",
+				"begin": "#",
+				"end": "$",
+				"captures": {
+					"0": { "name": "comment.line.m4" }
+				},
+				"patterns": []
+			},{
+				"name": "comment.line.m4",
+				"begin": "(dnl)\\b",
+				"end": "$",
+				"captures": {
+					"0": { "name": "keyword.control.m4" }
+				},
+				"patterns": []
+			}]
+		},
+		"shells": {
+			"comment": "Core M4 shell commands",
+			"name": "string.interpolated.m4",
+			"begin": "\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"0": { "name": "string.other.m4" }
+			},
+			"endCaptures": {
+				"0": { "name": "string.other.m4" }
+			},
+			"patterns": [{
+				"name": "string.quoted.other.m4",
+				"begin": "`",
+				"end": "'",
+				"patterns": [{ "include": "source.shell" }]
+			}]
+		},
+		"commands": {
+			"comment": "Core M4 shell commands",
+			"patterns": [{
+				"name": "string.quoted.other.m4",
+				"begin": "`",
+				"end": "'",
+				"patterns": [{ "include": "source.shell" }]
+			},{
+				"include": "source.shell"
+			}]
+		},
+		"functions": {
+			"comment": "User M4 functions",
+			"name": "support.function.m4",
+			"begin": "[\\w\\d_]*\\(",
+			"end": "\\)",
+			"patterns": [{ "include": "#expressions" }]
+		},
+		"constants": {
+			"comment": "GNU M4 constant keywords",
+			"patterns": [{
+				"name": "constant.language.m4",
+				"match": "\\b(__file__|__gnu__|__line__|__os2__|__program__|__unix__|__windows__)\\b"
+			}]
+		},
+		"buildins": {
+			"comment": "GNU M4 keywords",
+			"patterns": [{
+				"begin": "\\b(argn|array|arry_set|builtin|capitalize|changecom|changeword|cleardivert|cond|copy|curry|debugfile|debugmode|decr|define_blind|defn|downcase|dquote|dquote_elt|example|exch|fatal_error|foreach|foreachq|forloop|format|includeindex|indir|join|joinall|m4exit|m4wrap|mkstemp|nargs|os2|patsubst|popdef|pushdef|quote|regexp|rename|reverse|shift|sinclude|stack_foreach|stack_foreach_lifo|stack_foreach_sep|stack_foreach_sep_lifo|sysval|traceoff|traceon|unix|upcase|windows)(\\()",
+				"end": "\\)",
+				"beginCaptures": {
+					"1": { "name": "keyword.other.m4" },
+					"2": { "name": "keyword.other.m4" }
+				},
+				"endCaptures": {
+					"0": { "name": "keyword.other.m4" }
+				},
+				"patterns": [{ "include": "#expressions" }]
+			},{
+				"name": "keyword.other.m4",
+				"match": "\\b(changecom)\\b"
+			},{
+				"begin": "\\b(esyscmd)(\\()",
+				"end": "\\)",
+				"beginCaptures": {
+					"1": { "name": "keyword.other.m4" },
+					"2": { "name": "string.other.m4" }
+				},
+				"endCaptures": {
+					"0": { "name": "string.other.m4" }
+				},
+				"patterns": [{ "include": "#commands" }]
+			}]
+		}
+	},
+	"scopeName": "source.m4"
+}
