@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Language="en-US" Id="m4" Version="0.0.1" Publisher="lutzmad"/>
-    <DisplayName>Core-M4</DisplayName>
+    <DisplayName>M4 Core</DisplayName>
     <Description xml:space="preserve">Syntax highlighting for M4 core files</Description>
     <Tags>m4</Tags>
     <Categories>Programming Languages</Categories>
@@ -11,9 +11,9 @@
     <Properties>
       <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.55.0" />
       <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
-      <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/lutzmad/vscode-m4_highlight.git" />
-      <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/lutzmad/vscode-m4_highlight.git" />  
-      <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/lutzmad/vscode-m4_highlight.git" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/lutzmad/vscode-m4_core.git" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/lutzmad/vscode-m4_core.git" />  
+      <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/lutzmad/vscode-m4_core.git" />
       <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
     </Properties>
   </Metadata>

@@ -1,6 +1,6 @@
 # M4 README
 
-This is the README for your extension "Core M4". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "M4 Core". After writing up a brief description, we recommend including the following sections.
 
 This is a simple M4 core syntax highlighting extension.
 

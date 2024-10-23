@@ -1,6 +1,6 @@
 {
   "name": "m4",
-  "displayName": "Core M4",
+  "displayName": "M4 Core",
   "description": "A simple M4 core syntax highlighting extension. The standard POSIX and the GNU M4 buildin commands should be handled properly, based on the default quotation. Keep in mind, M4SUGAR, M4SH, AUTOCONF and AUTOTEST have chosen to use '\\[' and '\\]' for quotation. The mostly used AUTOCONF macros are not highlighted, therefore.",
   "version": "0.0.1",
   "author": "Lutz Mader",
@@ -20,12 +20,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/lutzmad/vscode-m4_highlight"
+    "url": "https://gitlab.com/lutzmad/vscode-m4_core"
   },
   "contributes": {
     "languages": [{
       "id": "m4",
-      "aliases": ["M4", "m4", "core m4"],
+      "aliases": ["M4", "m4", "m4 core"],
       "extensions": [".m4", ".mc"],
       "configuration": "./language-configuration.json"
     }],
