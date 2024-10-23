@@ -7,6 +7,7 @@
 		{ "include": "#brackets" },
 		{ "include": "#parameters" },
 		{ "include": "#arithmetics" },
+		{ "include": "#values" },
 		{ "include": "#comments" },
 		{ "include": "#constants" },
 		{ "include": "#buildins" },
@@ -20,6 +21,7 @@
 				{ "include": "#brackets" },
 				{ "include": "#parameters" },
 				{ "include": "#arithmetics" },
+				{ "include": "#values" },
 				{ "include": "#comments" },
 				{ "include": "#constants" },
 				{ "include": "#buildins" },
@@ -82,36 +84,57 @@
 				"begin": "\"",
 				"end": "\"",
 				"patterns": [{ "include": "#expressions" }]
+			},{
+				"name": "string.quoted.single.m4",
+				"begin": "'",
+				"end": "'",
+				"patterns": [{ "include": "#expressions" }]			
 			}]
 		},
 		"brackets": {
-			"comment": "Core M4 brackets",
+			"comment": "Core M4 brackets and some other",
 			"patterns": [{
+				"name": "string.interpolated.m4",
+				"begin": "\\{",
+				"end": "\\}",
+				"patterns": [{ "include": "#expressions" }]
+			},{
+				"name": "string.interpolated.m4",
+				"begin": "\\[",
+				"end": "\\]",
+				"patterns": [{ "include": "#expressions" }]
+			},{
 				"name": "string.interpolated.m4",
 				"begin": "\\(",
 				"end": "\\)",
-				"beginCaptures": {
-					"0": { "name": "string.other.m4" }
-				},
-				"endCaptures": {
-					"0": { "name": "string.other.m4" }
-				},
 				"patterns": [{ "include": "#expressions" }]
 			}]
 		},
 		"parameters": {
-			"comment": "Core M4 parameters",
+			"comment": "Core M4 parameters and some enhancements",
 			"patterns": [{
 				"name": "variable.parameter.m4",
-				"match": "\\b(\\$[\\d])\\b"
+				"match": "(\\$[\\d])\\b"
+			},{
+				"name": "variable.other.m4",
+				"match": "(\\$[\\d][\\d])\\b"
+			},{
+				"name": "variable.other.m4",
+				"match": "\\${[\\d][\\d]?}"
+			},{				
+				"name": "variable.other.m4",
+				"match": "\\$#"
+			},{
+				"name": "variable.other.m4",
+				"match": "\\$\\*"
+			},{
+				"name": "variable.other.m4",
+				"match": "\\$@"
 			}]
 		},
 		"arithmetics": {
 			"comment": "Core M4 arithmetics",
 			"patterns": [{
-				"name": "keyword.operator.unary.m4",
-				"match": "[-+]"
-			},{
 				"name": "keyword.operator.arithmetic.m4",
 				"match": "(\\*\\*|\\^)"
 			},{
@@ -120,6 +143,9 @@
 			},{
 				"name": "keyword.operator.assignment.m4",
 				"match": "="
+			},{
+				"name": "keyword.operator.unary.m4",
+				"match": "[-+]"
 			},{
 				"name": "keyword.operator.bitwise.m4",
 				"match": "(!|~)"
@@ -132,6 +158,19 @@
 			},{
 				"name": "keyword.operator.logical.m4",
 				"match": "(&|&&|\\||\\|\\|)"						
+			}]
+		},
+		"values": {
+			"comment": "Core M4 values",
+			"patterns": [{
+					"name": "constant.numeric.float.m4",
+					"match": "\\b([+-]?\\d+\\.\\d+)\\b"
+			},{
+					"name": "constant.numeric.float.m4",
+					"match": "\\b([+-]?\\d+\\.\\d+([eE][+-]?\\d+)?)\\b"
+			},{
+					"name": "constant.numeric.integer.m4",
+					"match": "\\b([+-]?\\d+)\\b"
 			}]
 		},
 		"comments": {
@@ -218,10 +257,10 @@
 				"end": "\\)",
 				"beginCaptures": {
 					"1": { "name": "keyword.other.m4" },
-					"2": { "name": "string.other.m4" }
+					"2": { "name": "keyword.other.m4" }
 				},
 				"endCaptures": {
-					"0": { "name": "string.other.m4" }
+					"0": { "name": "keyword.other.m4" }
 				},
 				"patterns": [{ "include": "#commands" }]
 			}]
